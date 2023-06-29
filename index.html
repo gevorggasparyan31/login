@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Login</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <h1>Login</h1>
+    <form id="loginForm">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required><br><br>
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required><br><br>
+
+      <input type="submit" value="Login">
+    </form>
+
+    <script>
+      const loginForm = document.getElementById('loginForm');
+
+      loginForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        axios.post('/login', { username, password })
+          .then((response) => {
+            console.log(response.data.message);
+            // You can redirect or perform other actions upon successful login
+          })
+          .catch((error) => {
+            console.error(error.response.data.message);
+            // You can display an error message or perform other actions upon failed login
+          });
+      });
+    </script>
+  </body>
+</html>
